@@ -7,7 +7,7 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    "@ohos/flutter_ohos": "file:libs/flutter_ohos.har",
-    "@ohos/permission_handle": "file:libs/permissionhandler.har"
+    "@ohos/flutter_ohos": "file:../har/flutter_embedding.har",
+    "@ohos/permission_handle": "file:../har/permissionhandler.har"
   }
 }

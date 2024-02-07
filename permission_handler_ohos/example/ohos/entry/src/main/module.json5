@@ -5,8 +5,7 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone",
-      "tablet"
+      "phone"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
@@ -14,7 +13,7 @@
     "abilities": [
       {
         "name": "EntryAbility",
-        "srcEntry": "./ets/entryability/EntryAbility.ts",
+        "srcEntry": "./ets/entryability/EntryAbility.ets",
         "description": "$string:EntryAbility_desc",
         "icon": "$media:icon",
         "label": "$string:EntryAbility_label",
@@ -34,7 +33,6 @@
       }
     ],
     "requestPermissions": [
-      {"name" :  "ohos.permission.READ_MEDIA"},
       {"name": "ohos.permission.READ_CALENDAR"},
       {"name": "ohos.permission.WRITE_CALENDAR"},
       {"name": "ohos.permission.CAMERA"},
