@@ -1,0 +1,16 @@
+{
+  "apiType": 'stageMode',
+  "buildOption": {
+    "napiLibFilterOption": {
+      "enableOverride": true
+    }
+  },
+  "targets": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "ohosTest",
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "permissionhandler",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+  }
+}
