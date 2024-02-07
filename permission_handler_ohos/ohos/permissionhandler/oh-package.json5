@@ -2,11 +2,11 @@
   "name": "permissionhandler",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
-  "main": "",
+  "main": "index.ets",
   "author": "",
   "license": "",
   "dependencies": {
-    "@ohos/flutter_ohos": "file:libs/flutter_ohos.har"
+    "@ohos/flutter_ohos": "file:libs/flutter_embedding.har"
   }
 }
 

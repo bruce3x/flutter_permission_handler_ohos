@@ -34,7 +34,6 @@
       }
     ],
     "requestPermissions": [
-      {"name" :  "ohos.permission.READ_MEDIA"},
       {"name": "ohos.permission.READ_CALENDAR"},
       {"name": "ohos.permission.WRITE_CALENDAR"},
       {"name": "ohos.permission.CAMERA"},
