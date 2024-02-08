@@ -6,6 +6,7 @@ import PermissionConstants from './PermissionConstants';
 import { PermissionRequestResult } from '@kit.AbilityKit';
 
 const TAG: string = 'PermissionUtils';
+
 export default class PermissionUtils {
   static parseOhosName(permission: String): number {
     switch (permission) {
@@ -100,6 +101,7 @@ export default class PermissionUtils {
       callback(false);
     }
   }
+
   static getRequestPermission(permissions: ArrayList<string>, callback: Callback<ArrayList<string>>): void {
     let permissionNames: ArrayList<string> = new ArrayList();
     try {
@@ -117,11 +119,10 @@ export default class PermissionUtils {
       Log.i(TAG, 'getRequestPermission exception : ' + e);
     }
   }
-  // static getManifestNames(permission: number, callback: Callback<ArrayList<any>>): void {
-  // static getManifestNames(permission: number, callback: Callback<ArrayList<ESObject>>): void {
+
   static getManifestNames(permission: number, callback: ESObject): void {
     let permissionNames: ArrayList<string> = new ArrayList();
-    switch(permission) {
+    switch (permission) {
       case PermissionConstants.PERMISSION_GROUP_CALENDAR:
         let calendarNames: ArrayList<string> = new ArrayList();
         calendarNames.add('ohos.permission.READ_CALENDAR');

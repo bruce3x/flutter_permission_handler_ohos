@@ -6,7 +6,6 @@ import { PermissionManager } from './PermissionManager';
 import { ServiceManager } from './ServiceManager';
 import UIAbility from '@ohos.app.ability.UIAbility';
 import ArrayList from '@ohos.util.ArrayList';
-import { ErrorCallback } from './ErrorCallback';
 
 export class MethodCallHandlerImpl implements MethodCallHandler {
   private applicationContext: common.Context;
