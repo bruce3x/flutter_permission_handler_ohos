@@ -1,20 +1,21 @@
+/*
+* Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd.
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "C:\\Users\\zhangbei\\.ohos\\config\\auto_debug_example_com.ohos.permissionhandler.example_260086000245563309.cer",
-          "storePassword": "0000001B82592CAC4D8175536E97BE6FB13461F8DFE61DA566DA09447446E9ECBD414EF0CD282EFE04E53B",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001B670A643F0832033F3430892D1226CD94FBF063522A75902F7F45B795776DFCC3FB4709A9780B3E",
-          "profile": "C:\\Users\\zhangbei\\.ohos\\config\\auto_debug_example_com.ohos.permissionhandler.example_260086000245563309.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\zhangbei\\.ohos\\config\\auto_debug_example_com.ohos.permissionhandler.example_260086000245563309.p12"
-        }
-      }
-    ],
+    "signingConfigs": [],
     "products": [
       {
         "name": "default",
