@@ -89,6 +89,7 @@
                 <filteritem type="filename" name="*.png|*.ico|*.jpg|*.webp|*.ttf|*.enc|*.mp3" desc="app resource files"/>
                 <filteritem type="filename" name="*.so|*.har" desc="engine二进制文件,不影响兼容性"/>
                 <filteritem type="filename" name="*.tgz" desc="hvigor本地插件,不影响兼容性"/>
+                <filteritem type="filename" name="*.md" desc="md文件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/har/" desc="hvigor本地插件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/entry/src/main/resources/rawfile/flutter_assets/" desc="资源文件，不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/dta/icudtl.dat" desc="ohos字体库文件，不影响兼容性"/>
@@ -101,6 +102,21 @@
                 <filteritem type='filepath' name="permission_handler_ohos/example/ohos/har/flutter_embedding.har" desc='二进制文件,不影响兼容性'/>
                 <filteritem type="filepath" name="permission_handler_ohos/example/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
                 <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/libs/arm64-v8a/libc++_shared.so" desc='二进制文件,不影响兼容性'/>
+                
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/shaders/ink_sparkle.frag" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/kernel_blob.bin" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/NOTICES.Z" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/vm_snapshot_data" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/fonts/MaterialIcons-Regular.otf" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/isolate_snapshot_data" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/shaders/ink_sparkle.frag" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/kernel_blob.bin" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/NOTICES.Z" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/icudtl.dat" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/vm_snapshot_data" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/fonts/MaterialIcons-Regular.otf" desc='二进制文件,不影响兼容性'/>
+                <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/isolate_snapshot_data" desc='二进制文件,不影响兼容性'/>
 
             </filefilter>
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
