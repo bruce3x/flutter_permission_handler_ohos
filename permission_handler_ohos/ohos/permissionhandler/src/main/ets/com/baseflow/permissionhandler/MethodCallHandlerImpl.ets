@@ -16,7 +16,7 @@
 import { MethodCallHandler, MethodResult } from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel';
 import common from '@ohos.app.ability.common';
 import MethodCall from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodCall';
-import { AppSettingManager, OpenAppSettingsSuccessCallback } from './AppSettingManager';
+import { AppSettingManager } from './AppSettingManager';
 import { PermissionManager } from './PermissionManager';
 import { ServiceManager } from './ServiceManager';
 import UIAbility from '@ohos.app.ability.UIAbility';
@@ -45,58 +45,58 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
     switch (call.method) {
       case 'checkServiceStatus':
         let permission: number = call.args;
-        this.serviceManager.checkServiceStatus(permission, this.applicationContext, Object({
+        this.serviceManager.checkServiceStatus(permission, this.applicationContext, {
           onSuccess: (serviceStatus: number) => {
             result.success(serviceStatus);
           }
-        }), Object({
+        } as ESObject, {
           onError: (errorCode: string, errorDescription: string) => {
             result.error(errorCode, errorDescription, null);
           }
-        }));
+        } as ESObject);
       break
       case 'checkPermissionStatus':
         let checkedPermission: number = call.args;
-        this.permissionManager.checkPermissionStatus(checkedPermission, this.applicationContext, Object({
+        this.permissionManager.checkPermissionStatus(checkedPermission, this.applicationContext, {
           onSuccess : (permissionStatus: number) => {
             result.success(permissionStatus);
           }
-        }));
+        } as ESObject);
       break;
       case 'requestPermissions':
         let permissions: ArrayList<number> = call.args;
-        this.permissionManager.requestPermissions(permissions, this.ability as UIAbility, Object({
+        this.permissionManager.requestPermissions(permissions, this.ability as UIAbility, {
           onSuccess : (results:  Map<number, number>) => {
             result.success(results);
           }
-        }), Object({
+        } as ESObject, {
           onError: (errorCode: string, errorDescription: string) => {
             result.error(errorCode, errorDescription, null);
           }
-        }));
+        } as ESObject);
       break;
       case 'shouldShowRequestPermissionRationale':
         let showShowPermission: number = call.args;
-        this.permissionManager.shouldShowRequestPermissionRationale(showShowPermission, Object({
+        this.permissionManager.shouldShowRequestPermissionRationale(showShowPermission, {
           onSuccess : (isShow: boolean) => {
             result.success(isShow);
           }
-        }), Object({
+        } as ESObject, {
           onError: (errorCode: string, errorDescription: string) => {
             result.error(errorCode, errorDescription, null);
           }
-        }));
+        } as ESObject);
       break;
       case 'openAppSettings':
-        this.appSettingManager.openAppSettings(this.ability, Object({
+        this.appSettingManager.openAppSettings(this.ability, {
           onSuccess: (isSuccess: boolean) => {
             result.success(isSuccess)
           }
-        }), Object({
+        } as ESObject, {
           onError: (errorCode: string, errorDescription: string) => {
             result.error(errorCode, errorDescription, null);
           }
-        }));
+        } as ESObject);
       break;
       default:
       result.notImplemented();

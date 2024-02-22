@@ -169,7 +169,7 @@ export class PermissionManager {
     let permissionsToRequest: ArrayList<ESObject>  = new ArrayList();
     let size: number = permissions.length;
     for (let permission of permissions) {
-      this.determinePermissionStatus(permission, Object({
+      this.determinePermissionStatus(permission, {
         onSuccess : (permissionStatus:ESObject) => {
           if (permissionStatus == PermissionConstants.PERMISSION_STATUS_GRANTED) {
             if (!this.requestResults?.has(permission)) {
@@ -217,7 +217,7 @@ export class PermissionManager {
             }
           });
         }
-      }));
+      } as ESObject);
     }
   }
 
