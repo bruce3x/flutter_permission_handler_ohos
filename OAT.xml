@@ -97,10 +97,8 @@
                 <filteritem type="filepath" name="*/ohos/hvigorw.bat" desc="hvigorw编译程序，不影响兼容性"/>
   
                 <filteritem type='filepath' name="permission_handler_ohos/ohos/permissionhandler/libs/flutter_embedding.har" desc='二进制文件,不影响兼容性'/>
-                <filteritem type="filepath" name="permission_handler_ohos/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
                 <filteritem type='filepath' name="permission_handler_ohos/example/ohos/dta/icudtl.dat" desc='二进制文件,不影响兼容性'/>
                 <filteritem type='filepath' name="permission_handler_ohos/example/ohos/har/flutter_embedding.har" desc='二进制文件,不影响兼容性'/>
-                <filteritem type="filepath" name="permission_handler_ohos/example/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
                 <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/libs/arm64-v8a/libc++_shared.so" desc='二进制文件,不影响兼容性'/>
                 
                 <filteritem type='filepath' name="permission_handler_ohos/example/ohos/entry/src/main/resources/rawfile/flutter_assets/shaders/ink_sparkle.frag" desc='二进制文件,不影响兼容性'/>
