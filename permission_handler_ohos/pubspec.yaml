@@ -11,8 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: permission_handler_android
-description: Permission plugin for Flutter. This plugin provides the Android API to request and check permissions.
+name: permission_handler_ohos
+description: Permission plugin for Flutter. This plugin provides the Ohos API to request and check permissions.
 homepage: https://github.com/baseflow/flutter-permission-handler
 version: 10.3.2
 
@@ -24,7 +24,7 @@ flutter:
   plugin:
     implements: permission_handler
     platforms:
-      android:
+      ohos:
         package: com.baseflow.permissionhandler
         pluginClass: PermissionHandlerPlugin
 

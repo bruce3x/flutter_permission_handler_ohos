@@ -11,8 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: permission_handler_android_example
-description: Demonstrates how to use the permission_handler_android plugin.
+name: permission_handler_ohos_example
+description: Demonstrates how to use the permission_handler_ohos plugin.
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
@@ -26,9 +26,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  permission_handler_android:
+  permission_handler_ohos:
     # When depending on this package from a real application you should use:
-    #   permission_handler_android: ^x.y.z
+    #   permission_handler_ohos: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.

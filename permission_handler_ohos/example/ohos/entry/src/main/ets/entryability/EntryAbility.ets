@@ -18,13 +18,11 @@ import { FlutterPlugin } from '@ohos/flutter_ohos/src/main/ets/embedding/engine/
 import { GeneratedPluginRegistrant } from '../plugins/GeneratedPluginRegistrant';
 import List from '@ohos.util.List';
 import FlutterEngine from '@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngine';
-import PermissionHandlerPlugin from '@ohos/permission_handle/src/main/ets/com/baseflow/permissionhandler/PermissionHandlerPlugin';
 
 export default class EntryAbility extends FlutterAbility {
   configureFlutterEngine(flutterEngine: FlutterEngine) {
     super.configureFlutterEngine(flutterEngine)
     let plugins = GeneratedPluginRegistrant.getPlugins() as List<FlutterPlugin>;
-    this.addPlugin(new PermissionHandlerPlugin());
     plugins.forEach((plugin) => {
       this.addPlugin(plugin);
     })
