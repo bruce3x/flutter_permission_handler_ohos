@@ -98,6 +98,10 @@ export class PermissionManager {
           successCallback.onSuccess(PermissionConstants.PERMISSION_STATUS_GRANTED);
           return;
         }
+        if (this.tokenId == null || this.tokenId == undefined) {
+          let bundleInfo = bundleManager.getBundleInfoForSelfSync(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION)
+          this.tokenId = bundleInfo.appInfo.accessTokenId;
+        }
         let status: abilityAccessCtrl.GrantStatus  = this.atManager.verifyAccessTokenSync(this.tokenId, name as Permissions);
         if (status != abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED) {
           successCallback.onSuccess(PermissionConstants.PERMISSION_STATUS_DENIED);
