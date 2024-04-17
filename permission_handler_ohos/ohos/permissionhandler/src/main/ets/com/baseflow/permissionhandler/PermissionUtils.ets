@@ -84,6 +84,9 @@ export default class PermissionUtils {
         return PermissionConstants.PERMISSION_GROUP_NEARBY_WIFI_DEVICES;
       case 'ohos.permission.READ_MEDIA':
         return PermissionConstants.PERMISSION_GROUP_AUDIO;
+      case 'ohos.permission.READ_IMAGEVIDEO':
+      case 'ohos.permission.WRITE_IMAGEVIDEO':
+        return PermissionConstants.PERMISSION_GROUP_PHOTOS;
       case 'ohos.permission.SCHEDULE_EXACT_ALARM':
         return PermissionConstants.PERMISSION_GROUP_SCHEDULE_EXACT_ALARM;
       default:
@@ -263,6 +266,11 @@ export default class PermissionUtils {
         break;
       case PermissionConstants.PERMISSION_GROUP_PHOTOS:
       case PermissionConstants.PERMISSION_GROUP_VIDEOS:
+        let photosVideos: ArrayList<string> = new ArrayList();
+        photosVideos.add('ohos.permission.READ_IMAGEVIDEO');
+        photosVideos.add('ohos.permission.WRITE_IMAGEVIDEO');
+        PermissionUtils.getRequestPermission(photosVideos, callback);
+        break;
       case PermissionConstants.PERMISSION_GROUP_AUDIO:
         let media: ArrayList<string> = new ArrayList();
         media.add('ohos.permission.READ_MEDIA');
