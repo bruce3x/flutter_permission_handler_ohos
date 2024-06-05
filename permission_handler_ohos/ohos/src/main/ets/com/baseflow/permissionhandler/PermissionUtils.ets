@@ -292,7 +292,7 @@ export default class PermissionUtils {
     }
   }
 
-  static toPermissionStatus(authResult: number | PermissionRequestResult): number {
+  static toPermissionStatus(authResult: number): number {
     if (authResult == -1) {
       return PermissionConstants.PERMISSION_STATUS_DENIED;
     }
