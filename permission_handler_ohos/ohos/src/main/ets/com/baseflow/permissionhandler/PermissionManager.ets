@@ -138,21 +138,20 @@ export class PermissionManager {
             let permissionNames: Array<string> = result.permissions;
             for (let i = 0; i < permissionNames.length; i++) {
               let permissionName: string = permissionNames[i];
-              let authResult: ESObject = grant[i];
+              let authResult: number = grant[i];
               let permission: number = PermissionUtils.parseOhosName(permissionName);
               if (permission == PermissionConstants.PERMISSION_GROUP_UNKNOWN)
                 continue;
-              let isSuccess: number  = authResult[i];
               if (permission == PermissionConstants.PERMISSION_GROUP_MICROPHONE) {
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_MICROPHONE, PermissionUtils.toPermissionStatus(isSuccess));
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_SPEECH, PermissionUtils.toPermissionStatus(isSuccess));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_MICROPHONE, PermissionUtils.toPermissionStatus(authResult));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_SPEECH, PermissionUtils.toPermissionStatus(authResult));
               } else if (permission == PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS) {
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS, PermissionUtils.toPermissionStatus(isSuccess));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS, PermissionUtils.toPermissionStatus(authResult));
               } else if (permission == PermissionConstants.PERMISSION_GROUP_LOCATION) {
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_WHEN_IN_USE, PermissionUtils.toPermissionStatus(isSuccess));
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION, PermissionUtils.toPermissionStatus(isSuccess));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_WHEN_IN_USE, PermissionUtils.toPermissionStatus(authResult));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION, PermissionUtils.toPermissionStatus(authResult));
               } else {
-                this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(result));
+                this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(authResult));
               }
               PermissionUtils.updatePermissionShouldShowStatus(permission);
             }
