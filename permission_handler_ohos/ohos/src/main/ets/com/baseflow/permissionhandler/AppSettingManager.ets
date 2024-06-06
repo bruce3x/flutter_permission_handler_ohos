@@ -33,10 +33,11 @@ export class AppSettingManager {
         return;
       }
       let want: Want = {
-        abilityName: 'com.huawei.hmos.settings.AppInfoAbility',
+        abilityName: 'com.huawei.hmos.settings.MainAbility',
         bundleName: 'com.huawei.hmos.settings',
+        uri: 'application_info_entry',
         parameters: {
-          "settingsParamBundleName" : bundleInfo.name
+          pushParams : bundleInfo.name
         }
       };
       try {
