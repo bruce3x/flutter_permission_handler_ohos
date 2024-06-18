@@ -170,7 +170,7 @@ export default class PermissionUtils {
       case PermissionConstants.PERMISSION_GROUP_LOCATION_WHEN_IN_USE:
       case PermissionConstants.PERMISSION_GROUP_LOCATION:
         let locationGroup: ArrayList<string> = new ArrayList();
-        locationGroup.add('ohos.permission.ohos.permission.LOCATION');
+        locationGroup.add('ohos.permission.LOCATION');
         locationGroup.add('ohos.permission.APPROXIMATELY_LOCATION');
         PermissionUtils.getRequestPermission(locationGroup, callback);
         break;
