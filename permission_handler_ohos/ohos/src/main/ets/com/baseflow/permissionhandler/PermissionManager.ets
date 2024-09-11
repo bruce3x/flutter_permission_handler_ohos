@@ -148,8 +148,14 @@ export class PermissionManager {
               } else if (permission == PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS) {
                 this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS, PermissionUtils.toPermissionStatus(authResult));
               } else if (permission == PermissionConstants.PERMISSION_GROUP_LOCATION) {
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_WHEN_IN_USE, PermissionUtils.toPermissionStatus(authResult));
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION, PermissionUtils.toPermissionStatus(authResult));
+
+                if (permissionName == 'ohos.permission.APPROXIMATELY_LOCATION') {
+                  this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_WHEN_IN_USE, PermissionUtils.toPermissionStatus(authResult));
+                }
+                if (permissionName == 'ohos.permission.LOCATION') {
+                  this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION, PermissionUtils.toPermissionStatus(authResult));
+                }
+                
               } else {
                 this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(authResult));
               }
