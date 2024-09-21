@@ -22,7 +22,8 @@ import Log from '@ohos/flutter_ohos/src/main/ets/util/Log';
 import UIAbility from '@ohos.app.ability.UIAbility';
 import ArrayList from '@ohos.util.ArrayList';
 import { ErrorCallback } from './ErrorCallback';
-import { Callback } from '@ohos.base';
+import { BusinessError, Callback } from '@ohos.base';
+import { notificationManager } from '@kit.NotificationKit';
 
 export class PermissionManager {
   private tokenId: number | null = null;
@@ -55,7 +56,12 @@ export class PermissionManager {
 
   private determinePermissionStatus(permission: number, successCallback: CheckPermissionSuccessCallback): void {
     if (permission == PermissionConstants.PERMISSION_GROUP_NOTIFICATION) {
-      this.checkPermission(successCallback, 'ohos.permission.NOTIFICATION_CONTROLLER');
+      let enabled = notificationManager.isNotificationEnabledSync();
+      if (enabled) {
+        successCallback.onSuccess(PermissionConstants.PERMISSION_STATUS_GRANTED);
+      } else {
+        successCallback.onSuccess(PermissionConstants.PERMISSION_STATUS_DENIED);
+      }
       return;
     }
     if (permission == PermissionConstants.PERMISSION_GROUP_BLUETOOTH) {
@@ -142,7 +148,21 @@ export class PermissionManager {
               let permission: number = PermissionUtils.parseOhosName(permissionName);
               if (permission == PermissionConstants.PERMISSION_GROUP_UNKNOWN)
                 continue;
-              if (permission == PermissionConstants.PERMISSION_GROUP_MICROPHONE) {
+              if (permission == PermissionConstants.PERMISSION_GROUP_NOTIFICATION) {
+                notificationManager.requestEnableNotification(this.ability?.context).then(() => {
+                  let enabled = notificationManager.isNotificationEnabledSync();
+                  if (enabled) {
+                    this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_NOTIFICATION, PermissionConstants.PERMISSION_STATUS_GRANTED);
+                  } else {
+                    this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_NOTIFICATION, PermissionConstants.PERMISSION_STATUS_DENIED);
+                  }
+                  this.successCallback?.onSuccess(this.requestResults as Map<number,number>);
+                }).catch((err: BusinessError) => {
+                  this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_NOTIFICATION, PermissionConstants.PERMISSION_STATUS_DENIED);
+                  this.successCallback?.onSuccess(this.requestResults as Map<number,number>);
+                });
+                return;
+              } else if (permission == PermissionConstants.PERMISSION_GROUP_MICROPHONE) {
                 this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_MICROPHONE, PermissionUtils.toPermissionStatus(authResult));
                 this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_SPEECH, PermissionUtils.toPermissionStatus(authResult));
               } else if (permission == PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS) {
