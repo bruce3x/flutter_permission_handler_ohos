@@ -1,0 +1,44 @@
+# Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: permission_handler_ohos_example
+description: Demonstrates how to use the permission_handler_ohos plugin.
+
+environment:
+  sdk: '>=2.19.6 <4.0.0'
+
+dependencies:
+  baseflow_plugin_template: ^2.1.2
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  permission_handler_ohos:
+    # When depending on this package from a real application you should use:
+    #   permission_handler_ohos: ^x.y.z
+    # See https://dart.dev/tools/pub/dependencies#version-constraints
+    # The example app is bundled with the plugin so we use a path dependency on
+    # the parent directory to use the current plugin's version.
+    path: ../
+
+  url_launcher: ^6.0.12
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - res/images/baseflow_logo_def_light-02.png
+    - res/images/poweredByBaseflowLogoLight@3x.png
