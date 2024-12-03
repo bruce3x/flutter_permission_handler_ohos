@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "flutter-permission-handler",
+        "License": "MIT License",
+        "License File": "LICENSE",
+        "Version Number": "42f49529ed4572bae2bd9f7522c88a1f306ffa5c",
+        "Owner": "george.lihui@huawei.com",
+        "Upstream URL": "https://github.com/baseflow/flutter-permission-handler/",
+        "Description": "The Flutter permission_handler plugin is build following the federated plugin architecture."
+    }
+]
