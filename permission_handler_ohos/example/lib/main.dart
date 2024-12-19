@@ -49,24 +49,44 @@ class PermissionHandlerWidget extends StatefulWidget {
 }
 
 class _PermissionHandlerWidgetState extends State<PermissionHandlerWidget> {
+  final PermissionHandlerPlatform _permissionHandler =
+        PermissionHandlerPlatform.instance;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView(
-          children: Permission.values
-              .where((permission) {
-                return permission != Permission.unknown &&
-                    permission != Permission.mediaLibrary &&
-                    permission != Permission.photosAddOnly &&
-                    permission != Permission.reminders &&
-                    permission != Permission.bluetooth &&
-                    permission != Permission.appTrackingTransparency &&
-                    permission != Permission.criticalAlerts &&
-                    permission != Permission.assistant &&
-                    permission != Permission.backgroundRefresh;
-              })
-              .map((permission) => PermissionWidget(permission))
-              .toList()),
+    return Scaffold(
+      backgroundColor: Colors.black.withOpacity(0.8),
+      body: Center(
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                final boo = await _permissionHandler.openAppSettings();
+                print('_permissionHandler:: boo: $boo');
+              },
+              child: Text('Open App Setting'),
+            ),
+            Expanded(
+              child: ListView(
+                children: Permission.values
+                  .where((permission) {
+                      return permission!= Permission.unknown &&
+                          permission!= Permission.mediaLibrary &&
+                          permission!= Permission.photosAddOnly &&
+                          permission!= Permission.reminders &&
+                          permission!= Permission.bluetooth &&
+                          permission!= Permission.appTrackingTransparency &&
+                          permission!= Permission.criticalAlerts &&
+                          permission!= Permission.assistant &&
+                          permission!= Permission.backgroundRefresh;
+                    })
+                  .map((permission) => PermissionWidget(permission))
+                  .toList(),
+              ),
+            ),
+          ],
+        ),
+      )
     );
   }
 }

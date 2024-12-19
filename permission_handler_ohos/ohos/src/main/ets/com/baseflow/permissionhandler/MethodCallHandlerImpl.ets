@@ -89,7 +89,7 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
         } as ESObject);
       break;
       case 'openAppSettings':
-        this.appSettingManager.openAppSettings(this.ability, {
+        this.appSettingManager.openAppSettings(this.applicationContext, this.ability, {
           onSuccess: (isSuccess: boolean) => {
             result.success(isSuccess)
           }
