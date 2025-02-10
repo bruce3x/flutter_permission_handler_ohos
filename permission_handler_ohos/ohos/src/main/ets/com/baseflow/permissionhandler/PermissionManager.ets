@@ -177,7 +177,17 @@ export class PermissionManager {
                 }
                 
               } else {
-                this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(authResult));
+                // this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(authResult));
+                let hasDialog: boolean | null = null;
+                if (result.dialogShownResults != undefined) {
+                  hasDialog = result.dialogShownResults[i];
+                }
+                if (authResult == -1 && hasDialog == false) {
+                  //用户已经拒绝，需要打开设置页面进行授权
+                  this.requestResults?.set(permission, PermissionConstants.PERMISSION_STATUS_NEVER_ASK_AGAIN);
+                } else {
+                  this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(authResult));
+                }
               }
               PermissionUtils.updatePermissionShouldShowStatus(permission);
             }
@@ -257,7 +267,12 @@ export class PermissionManager {
         Log.d(PermissionConstants.LOG_TAG, "Bluetooth permission missing in manifest");
         successCallback.onSuccess(PermissionConstants.PERMISSION_STATUS_DENIED);
       } else {
-        successCallback.onSuccess(PermissionConstants.PERMISSION_STATUS_GRANTED);
+        // successCallback.onSuccess(PermissionConstants.PERMISSION_STATUS_GRANTED);
+        this.checkPermission( {
+          onSuccess: (permissionStatus: number) => {
+            successCallback.onSuccess(permissionStatus == -1 ? 0 : 1);
+          }
+        } as ESObject ,'ohos.permission.ACCESS_BLUETOOTH');
       }
     });
   }
