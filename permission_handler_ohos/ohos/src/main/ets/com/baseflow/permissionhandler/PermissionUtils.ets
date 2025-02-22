@@ -76,8 +76,9 @@ export default class PermissionUtils {
       case 'ohos.permission.DISCOVER_BLUETOOTH':
         return PermissionConstants.PERMISSION_GROUP_BLUETOOTH_ADVERTISE;
       case 'ohos.permission.MANAGE_BLUETOOTH':
-      case 'ohos.permission.ACCESS_BLUETOOTH':
         return PermissionConstants.PERMISSION_GROUP_BLUETOOTH_CONNECT;
+      case 'ohos.permission.ACCESS_BLUETOOTH':
+        return PermissionConstants.PERMISSION_GROUP_BLUETOOTH;
       case 'ohos.permission.NOTIFICATION_CONTROLLER':
         return PermissionConstants.PERMISSION_GROUP_NOTIFICATION;
       case 'ohos.permission.NEARBY_WIFI_DEVICES':

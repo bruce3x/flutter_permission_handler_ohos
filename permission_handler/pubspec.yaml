@@ -32,6 +32,7 @@ dependencies:
       url: https://gitee.com/openharmony-sig/flutter_permission_handler.git
       ref: master
       path: permission_handler_ohos
+
   permission_handler_platform_interface: ^3.11.0
 
 dev_dependencies:
