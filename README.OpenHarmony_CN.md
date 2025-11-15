@@ -81,6 +81,47 @@ flutter pub get
 
 ## 6. 其他
 
+### 6.1 权限请求返回值拓展
+
+> [!TIP] 该库目前在请求和检查权限返回的状态只有 PERMISSION_STATUS_DENIED 和 PERMISSION_STATUS_GRANTED，如需区分返回的 PERMISSION_STATUS_DENIED 是尚未询问还是已拒绝，建议按照以下方案进行区分
+
+**6.1.1 permission_handler_ohos/ohos/src/main/ets/com/baseflow/permissionhandler/PermissionUtils.ets 文件的 toPermissionStatus 方法改为：**
+
+```typescript
+static toPermissionStatus(authResult: number, result:PermissionRequestResult): number {
+  if (authResult == -1 && result.dialogShownResults && result.dialogShownResults.length > 0) {
+    if (result.dialogShownResults[0]){
+      return PermissionConstants.PERMISSION_STATUS_DENIED;
+    } else {
+      return PermissionConstants.PERMISSION_STATUS_NEVER_ASK_AGAIN;
+    }
+  } 
+  if (authResult == 2) {
+    return PermissionConstants.PERMISSION_STATUS_RESTRICTED;
+  }
+return PermissionConstants.PERMISSION_STATUS_GRANTED;
+}
+```
+
+**6.1.2 通过 checkPermissionStatus 去检测权限是 PERMISSION_STATUS_DENIED 的时候，直接调用 requestPermissions 去申请权限：**
+
+- 如果返回 PermissionConstants.PERMISSION_STATUS_DENIED 表示用户第一次拒绝，
+- 如果返回PermissionConstants.PERMISSION_STATUS_NEVER_ASK_AGAIN表示用户已经拒绝过，这是第二次申请，建议引导用户跳转到设置界面，
+- 如果返回PermissionConstants.PERMISSION_GRANTED，表示用户授予了权限。 
+- 如果返回 PERMISSION_STATUS_RESTRICTED 表示请求无效,可能原因有：
+
+    1. 未在设置文件中声明目标权限；
+    2. 权限名非法；
+    3. 部分权限存在特殊申请条件，在申请对应权限时未满足其指定的条件。
+
+**6.1.3 该方案 dart 与 ets 状态对应关系**
+
+| ets                               | dart |
+|-----------------------------------|-------------|
+| PERMISSION_STATUS_DENIED          | PermissionStatus.denied     |
+| PERMISSION_STATUS_GRANTED         | PermissionStatus.granted     |
+| PERMISSION_STATUS_NEVER_ASK_AGAIN | PermissionStatus.permanentlyDenied     |
+| PERMISSION_STATUS_RESTRICTED      | PermissionStatus.restricted     |
 
 ## 7. 开源协议
 
