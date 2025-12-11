@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
- 
+
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -311,8 +311,15 @@ export default class PermissionUtils {
     }
   }
 
-  static toPermissionStatus(authResult: number): number {
-    if (authResult == -1 || authResult == 2) {
+  static toPermissionStatus(authResult: number, dialogShownResult: boolean): number {
+    if (authResult == -1) {
+      if (dialogShownResult) {
+        return PermissionConstants.PERMISSION_STATUS_DENIED
+      } else {
+        return PermissionConstants.PERMISSION_STATUS_NEVER_ASK_AGAIN
+      }
+    }
+    if (authResult == 2) {
       return PermissionConstants.PERMISSION_STATUS_DENIED;
     }
     return PermissionConstants.PERMISSION_STATUS_GRANTED;
