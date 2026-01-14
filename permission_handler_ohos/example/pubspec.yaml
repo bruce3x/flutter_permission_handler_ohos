@@ -23,7 +23,7 @@ dependencies:
     sdk: flutter
 
 dependency_overrides:
-  baseflow_plugin_template: 2.1.2
+  baseflow_plugin_template: 2.2.1
 
 dev_dependencies:
   flutter_test:

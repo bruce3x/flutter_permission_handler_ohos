@@ -24,7 +24,7 @@ dependencies:
     git:
       url: https://gitcode.com/openharmony-sig/flutter_permission_handler.git
       path: permission_handler_ohos
-      ref: br_permission_handler_v11.3.1_ohos
+      ref: br_permission_handler_v12.0.1_ohos
 
 ...
 ```
@@ -49,6 +49,8 @@ flutter pub get
 在以下版本中已测试通过
 
 1.Flutter: 3.22.1-ohos-1.0.1; SDK: 5.0.0(12); IDE: DevEco Studio: 5.0.13.200; ROM: 5.1.0.120 SP3;
+2.Flutter: 3.35.7-ohos-0.0.1; SDK: 6.0.1(21); IDE: DevEco Studio: 6.0.1.260; ROM: 6.0.0.120 SP6;
+
 
 
 ## 3. API

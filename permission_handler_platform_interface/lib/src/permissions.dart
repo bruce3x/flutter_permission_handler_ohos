@@ -1,17 +1,17 @@
-part of permission_handler_platform_interface;
+part of '../permission_handler_platform_interface.dart';
 
 /// A special kind of permission, used to access a service.
 ///
 /// Additionally to the actions that normal [Permission]s have, you can also
 /// query the status of the related service.
 class PermissionWithService extends Permission {
-  const PermissionWithService._(int value) : super._(value);
+  const PermissionWithService._(super.value) : super._();
 
   /// Creates a [PermissionWithService] instance.
   ///
   /// This constructor is marked public for testing purposes only.
   @visibleForTesting
-  const PermissionWithService.private(int value) : super._(value);
+  const PermissionWithService.private(super.value) : super._();
 }
 
 /// Defines the permissions which can be checked and requested.
@@ -98,21 +98,21 @@ class Permission {
   /// - When running Photos (iOS 14+ read & write access level)
   ///
   /// **Android:**
-  /// - Devices running Android 12 (API level 32) or lower: use [Permissions.storage].
-  /// - Devices running Android 13 (API level 33) and above: Should use [Permissions.photos].
+  /// - Devices running Android 12 (API level 32) or lower: use [Permission.storage].
+  /// - Devices running Android 13 (API level 33) and above: Should use [Permission.photos].
   ///
   /// EXAMPLE: in Manifest:
-  /// <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
-  /// <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+  /// &lt;uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/&gt;
+  /// &lt;uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/&gt;
   ///
   /// In Flutter to check the status:
   ///
   /// if (Platform.isAndroid) {
   ///   final androidInfo = await DeviceInfoPlugin().androidInfo;
   ///   if (androidInfo.version.sdkInt <= 32) {
-  ///     use [Permissions.storage.status]
+  ///     use [Permission.storage.status]
   ///   }  else {
-  ///     use [Permissions.photos.status]
+  ///     use [Permission.photos.status]
   ///   }
   /// }
   static const photos = Permission._(9);
@@ -411,7 +411,7 @@ class Permission {
     'calendarWriteOnly',
     'calendarFullAccess',
     'assistant',
-    'backgroundRefresh'
+    'backgroundRefresh',
   ];
 
   @override

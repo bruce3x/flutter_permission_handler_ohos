@@ -37,7 +37,7 @@ android.enableJetifier=true
 
 ```gradle
 android {
-  compileSdkVersion 33
+  compileSdkVersion 35
   ...
 }
 ```
@@ -72,7 +72,7 @@ You must list the permission you want to use in your application:
 
       target.build_configurations.each do |config|
         # You can remove unused permissions here
-        # for more information: https://github.com/BaseflowIT/flutter-permission-handler/blob/master/permission_handler/ios/Classes/PermissionHandlerEnums.h
+        # for more information: https://github.com/Baseflow/flutter-permission-handler/blob/main/permission_handler_apple/ios/Classes/PermissionHandlerEnums.h
         # e.g. when you don't need camera permission, just add 'PERMISSION_CAMERA=0'
         config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
           '$(inherited)',
@@ -127,7 +127,7 @@ You must list the permission you want to use in your application:
           ## dart: PermissionGroup.criticalAlerts
           'PERMISSION_CRITICAL_ALERTS=1',
 
-          ## dart: PermissionGroup.criticalAlerts
+          ## dart: PermissionGroup.assistant
           'PERMISSION_ASSISTANT=1',
         ]
 
@@ -147,23 +147,28 @@ You must list the permission you want to use in your application:
    e.g. when you don't need camera permission, just delete 'NSCameraUsageDescription'
    The following lists the relationship between `Permission` and `The key of Info.plist`:
 
-| Permission                                                                                  | Info.plist                                                                                                    | Macro                                |
-|---------------------------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| PermissionGroup.calendar (< iOS 17)                                                         | NSCalendarsUsageDescription                                                                                   | PERMISSION_EVENTS                    |
-| PermissionGroup.calendarWriteOnly (iOS 17+)                                                 | NSCalendarsWriteOnlyAccessUsageDescription                                                                    | PERMISSION_EVENTS                    |
-| PermissionGroup.calendarFullAccess  (iOS 17+)                                               | NSCalendarsFullAccessUsageDescription                                                                         | PERMISSION_EVENTS_FULL_ACCESS        |
-| PermissionGroup.reminders                                                                   | NSRemindersUsageDescription                                                                                   | PERMISSION_REMINDERS                 |
-| PermissionGroup.contacts                                                                    | NSContactsUsageDescription                                                                                    | PERMISSION_CONTACTS                  |
-| PermissionGroup.camera                                                                      | NSCameraUsageDescription                                                                                      | PERMISSION_CAMERA                    |
-| PermissionGroup.microphone                                                                  | NSMicrophoneUsageDescription                                                                                  | PERMISSION_MICROPHONE                |
-| PermissionGroup.speech                                                                      | NSSpeechRecognitionUsageDescription                                                                           | PERMISSION_SPEECH_RECOGNIZER         |
-| PermissionGroup.photos                                                                      | NSPhotoLibraryUsageDescription                                                                                | PERMISSION_PHOTOS                    |
-| PermissionGroup.photosAddOnly                                                               | NSPhotoLibraryAddUsageDescription                                                                             | PERMISSION_PHOTOS_ADD_ONLY           |
-| PermissionGroup.location, PermissionGroup.locationAlways, PermissionGroup.locationWhenInUse | NSLocationUsageDescription, NSLocationAlwaysAndWhenInUseUsageDescription, NSLocationWhenInUseUsageDescription | PERMISSION_LOCATION                  |
-| PermissionGroup.locationWhenInUse                                                           | NSLocationWhenInUseUsageDescription                                                                           | PERMISSION_LOCATION_WHENINUSE        |
-| PermissionGroup.notification                                                                | PermissionGroupNotification                                                                                   | PERMISSION_NOTIFICATIONS             |
-| PermissionGroup.mediaLibrary                                                                | NSAppleMusicUsageDescription, kTCCServiceMedia                                                                |
-PERMISSION_MEDIA_LIBRARY             |
+| Permission                                                                                  | Info.plist                                                                                                     | Macro                                  |
+|---------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| PermissionGroup.calendar (< iOS 17)                                                         | NSCalendarsUsageDescription                                                                                    | PERMISSION_EVENTS                      |
+| PermissionGroup.calendarWriteOnly (iOS 17+)                                                 | NSCalendarsWriteOnlyAccessUsageDescription                                                                     | PERMISSION_EVENTS                      |
+| PermissionGroup.calendarFullAccess  (iOS 17+)                                               | NSCalendarsFullAccessUsageDescription                                                                          | PERMISSION_EVENTS_FULL_ACCESS          |
+| PermissionGroup.reminders                                                                   | NSRemindersUsageDescription                                                                                    | PERMISSION_REMINDERS                   |
+| PermissionGroup.contacts                                                                    | NSContactsUsageDescription                                                                                     | PERMISSION_CONTACTS                    |
+| PermissionGroup.camera                                                                      | NSCameraUsageDescription                                                                                       | PERMISSION_CAMERA                      |
+| PermissionGroup.microphone                                                                  | NSMicrophoneUsageDescription                                                                                   | PERMISSION_MICROPHONE                  |
+| PermissionGroup.speech                                                                      | NSSpeechRecognitionUsageDescription                                                                            | PERMISSION_SPEECH_RECOGNIZER           |
+| PermissionGroup.photos                                                                      | NSPhotoLibraryUsageDescription                                                                                 | PERMISSION_PHOTOS                      |
+| PermissionGroup.photosAddOnly                                                               | NSPhotoLibraryAddUsageDescription                                                                              | PERMISSION_PHOTOS_ADD_ONLY             |
+| PermissionGroup.location, PermissionGroup.locationAlways, PermissionGroup.locationWhenInUse | NSLocationUsageDescription, NSLocationAlwaysAndWhenInUseUsageDescription, NSLocationWhenInUseUsageDescription  | PERMISSION_LOCATION                    |
+| PermissionGroup.locationWhenInUse                                                           | NSLocationWhenInUseUsageDescription                                                                            | PERMISSION_LOCATION_WHENINUSE          |
+| PermissionGroup.notification                                                                | PermissionGroupNotification                                                                                    | PERMISSION_NOTIFICATIONS               |
+| PermissionGroup.mediaLibrary                                                                | NSAppleMusicUsageDescription, kTCCServiceMedia                                                                 | PERMISSION_MEDIA_LIBRARY               |
+| PermissionGroup.sensors                                                                     | NSMotionUsageDescription                                                                                       | PermissionGroupSensors                 |
+| PermissionGroup.bluetooth                                                                   | NSBluetoothAlwaysUsageDescription, NSBluetoothPeripheralUsageDescription                                       | PermissionGroupBluetooth               |
+| PermissionGroup.appTrackingTransparency                                                     | NSUserTrackingUsageDescription                                                                                 | PermissionGroupAppTrackingTransparency |
+| PermissionGroup.criticalAlerts                                                              | UNAuthorizationOptionCriticalAlert                                                                             | PermissionGroupCriticalAlerts          |
+| PermissionGroup.assistant                                                                   | NSSiriUsageDescription                                                                                         | PermissionGroupAssistant               |
+
 
 4. Clean & Rebuild
 
@@ -286,6 +291,10 @@ If your application needs access to Android's file system, it is possible to req
 ### Requesting `Permission.locationAlways` always returns "denied" on Android 10+ (API 29+). What can I do?
 
 Starting with Android 10, apps are required to first obtain permission to read the device's location in the foreground, before requesting to read the location in the background as well. When requesting the 'location always' permission directly, or when requesting both permissions at the same time, the system will ignore the request. So, instead of calling only `Permission.location.request()`, make sure to first call either `Permission.location.request()` or `Permission.locationWhenInUse.request()`, and obtain permission to read the GPS. Once you obtain this permission, you can call `Permission.locationAlways.request()`. This will present the user with the option to update the settings so the location can always be read in the background. For more information, visit the [Android documentation on requesting location permissions](https://developer.android.com/training/location/permissions#request-only-foreground).
+
+### onRequestPermissionsResult is called without results. What can I do?
+
+It is probably caused by a difference between completeSdkVersion and targetSdkVersion. It can be depending on the flutter version that you use. `targetSdkVersion = flutter.targetSdkVersion` in the app/build.gradle indicates that the targetSdkVersion is flutter version dependant. For more information: [issue 1222](https://github.com/Baseflow/flutter-permission-handler/issues/1222)
 
 ### Checking or requesting a permission terminates the application on iOS. What can I do?
 
