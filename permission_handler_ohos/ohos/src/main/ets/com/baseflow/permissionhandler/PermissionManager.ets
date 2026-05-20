@@ -143,14 +143,14 @@ export class PermissionManager {
             this.ongoing = false;
             let grant: Array<number> = result.authResults;
             let permissionNames: Array<string> = result.permissions;
-            let dialogShownResults:Array<boolean> = result.dialogShownResults ?? [];
+            let dialogShownResults: Array<boolean> = result.dialogShownResults ?? [];
             // Calendar permissions are split between WRITE and READ in Android, and split between WRITE
             // and FULL ACCESS in the plugin. We need special logic for this translation.
             let calendarWriteIndex: number = permissionNames.indexOf('ohos.permission.WRITE_CALENDAR');
             // WRITE -> WRITE.
             if (calendarWriteIndex >= 0) {
               let authResult: number = grant[calendarWriteIndex];
-              let dialogShownResult: boolean = dialogShownResults[calendarWriteIndex];
+              let dialogShownResult: boolean = dialogShownResults[calendarWriteIndex] ?? true;
               let writeStatus: number = PermissionUtils.toPermissionStatus(authResult, dialogShownResult);
               this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_CALENDAR_WRITE_ONLY, writeStatus);
 
@@ -158,7 +158,7 @@ export class PermissionManager {
               let calendarReadIndex: number = permissionNames.indexOf('ohos.permission.READ_CALENDAR');
               if (calendarReadIndex >= 0) {
                 let readGrantResult: number = grant[calendarReadIndex];
-                let dialogShownResult: boolean = dialogShownResults[calendarWriteIndex];
+                let dialogShownResult: boolean = dialogShownResults[calendarReadIndex] ?? true;
                 let readStatus: number = PermissionUtils.toPermissionStatus(readGrantResult, dialogShownResult);
                 let fullAccessStatus = PermissionUtils.strictestStatusFromTwo(writeStatus, readStatus);
                 this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_CALENDAR_FULL_ACCESS, fullAccessStatus);
@@ -170,7 +170,7 @@ export class PermissionManager {
             for (let i = 0; i < permissionNames.length; i++) {
               let permissionName: string = permissionNames[i];
               let authResult: number = grant[i];
-              let dialogShownResult: boolean = dialogShownResults[i];
+              let dialogShownResult: boolean = dialogShownResults[i] ?? true;
               let permission: number = PermissionUtils.parseOhosName(permissionName);
               // WRITE_CALENDAR and READ_CALENDAR permission results have already been handled.
               if ((permissionName == 'ohos.permission.WRITE_CALENDAR') || (permissionName == 'ohos.permission.READ_CALENDAR')) {

@@ -311,18 +311,17 @@ export default class PermissionUtils {
     }
   }
 
-  static toPermissionStatus(authResult: number, dialogShownResult: boolean): number {
-    if (authResult == -1) {
-      if (dialogShownResult) {
-        return PermissionConstants.PERMISSION_STATUS_DENIED
-      } else {
-        return PermissionConstants.PERMISSION_STATUS_NEVER_ASK_AGAIN
-      }
+  static toPermissionStatus(authResult: number, dialogShownResult: boolean = true): number {
+    if (authResult == 0) {
+      return PermissionConstants.PERMISSION_STATUS_GRANTED;
     }
-    if (authResult == 2) {
+    if (authResult == -1 && !dialogShownResult) {
+      return PermissionConstants.PERMISSION_STATUS_NEVER_ASK_AGAIN;
+    }
+    if (authResult == -1 || authResult == 2) {
       return PermissionConstants.PERMISSION_STATUS_DENIED;
     }
-    return PermissionConstants.PERMISSION_STATUS_GRANTED;
+    return PermissionConstants.PERMISSION_STATUS_DENIED;
   }
 
   static updatePermissionShouldShowStatus(permission: number): void {
