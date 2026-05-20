@@ -143,20 +143,21 @@ export class PermissionManager {
             this.ongoing = false;
             let grant: Array<number> = result.authResults;
             let permissionNames: Array<string> = result.permissions;
+            let dialogShownResults: Array<boolean> = result.dialogShownResults ?? [];
             // Calendar permissions are split between WRITE and READ in Android, and split between WRITE
             // and FULL ACCESS in the plugin. We need special logic for this translation.
             let calendarWriteIndex: number = permissionNames.indexOf('ohos.permission.WRITE_CALENDAR');
             // WRITE -> WRITE.
             if (calendarWriteIndex >= 0) {
               let authResult: number = grant[calendarWriteIndex];
-              let writeStatus: number = PermissionUtils.toPermissionStatus(authResult);
+              let writeStatus: number = PermissionUtils.toPermissionStatus(authResult, dialogShownResults[calendarWriteIndex] ?? true);
               this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_CALENDAR_WRITE_ONLY, writeStatus);
 
               // WRITE + READ -> FULL ACCESS.
               let calendarReadIndex: number = permissionNames.indexOf('ohos.permission.READ_CALENDAR');
               if (calendarReadIndex >= 0) {
                 let readGrantResult: number = grant[calendarReadIndex];
-                let readStatus: number = PermissionUtils.toPermissionStatus(readGrantResult);
+                let readStatus: number = PermissionUtils.toPermissionStatus(readGrantResult, dialogShownResults[calendarReadIndex] ?? true);
                 let fullAccessStatus = PermissionUtils.strictestStatusFromTwo(writeStatus, readStatus);
                 this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_CALENDAR_FULL_ACCESS, fullAccessStatus);
                 // Support deprecated CALENDAR permission.
@@ -167,6 +168,7 @@ export class PermissionManager {
             for (let i = 0; i < permissionNames.length; i++) {
               let permissionName: string = permissionNames[i];
               let authResult: number = grant[i];
+              let dialogShownResult: boolean = dialogShownResults[i] ?? true;
               let permission: number = PermissionUtils.parseOhosName(permissionName);
               // WRITE_CALENDAR and READ_CALENDAR permission results have already been handled.
               if ((permissionName == 'ohos.permission.WRITE_CALENDAR') || (permissionName == 'ohos.permission.READ_CALENDAR')) {
@@ -189,21 +191,21 @@ export class PermissionManager {
                 });
                 return;
               } else if (permission == PermissionConstants.PERMISSION_GROUP_MICROPHONE) {
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_MICROPHONE, PermissionUtils.toPermissionStatus(authResult));
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_SPEECH, PermissionUtils.toPermissionStatus(authResult));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_MICROPHONE, PermissionUtils.toPermissionStatus(authResult, dialogShownResult));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_SPEECH, PermissionUtils.toPermissionStatus(authResult, dialogShownResult));
               } else if (permission == PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS) {
-                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS, PermissionUtils.toPermissionStatus(authResult));
+                this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_ALWAYS, PermissionUtils.toPermissionStatus(authResult, dialogShownResult));
               } else if (permission == PermissionConstants.PERMISSION_GROUP_LOCATION) {
 
                 if (permissionName == 'ohos.permission.APPROXIMATELY_LOCATION') {
-                  this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_WHEN_IN_USE, PermissionUtils.toPermissionStatus(authResult));
+                  this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION_WHEN_IN_USE, PermissionUtils.toPermissionStatus(authResult, dialogShownResult));
                 }
                 if (permissionName == 'ohos.permission.LOCATION') {
-                  this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION, PermissionUtils.toPermissionStatus(authResult));
+                  this.requestResults?.set(PermissionConstants.PERMISSION_GROUP_LOCATION, PermissionUtils.toPermissionStatus(authResult, dialogShownResult));
                 }
 
               } else {
-                this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(authResult));
+                this.requestResults?.set(permission, PermissionUtils.toPermissionStatus(authResult, dialogShownResult));
               }
               PermissionUtils.updatePermissionShouldShowStatus(permission);
             }
