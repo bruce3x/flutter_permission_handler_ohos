@@ -19,6 +19,8 @@ flutter:
         default_package: permission_handler_html
       windows:
         default_package: permission_handler_windows
+      ohos:
+        default_package: permission_handler_ohos
 
 dependencies:
   flutter:
@@ -28,6 +30,11 @@ dependencies:
   permission_handler_apple: ^9.4.6
   permission_handler_html: ^0.1.1
   permission_handler_windows: ^0.2.1
+  permission_handler_ohos:
+    git:
+      url: https://github.com/bruce3x/flutter_permission_handler_ohos.git
+      path: permission_handler_ohos
+      ref: bruce/fix/br_v12.0.1_ohos-permission-status
   permission_handler_platform_interface: ^4.3.0
 
 dev_dependencies:
